@@ -4,12 +4,12 @@
         $challenge = $_REQUEST['hub_challenge'];
         $token = $_REQUEST['hub_verify_token'];
     }
-    if($token=="covidbot") {
+    if($token=="myCustomToken123") {
         echo $challenge;
     }
 
     $input = json_decode(file_get_contents('php://input'), true);
-    
+
     $userID = $input['entry'][0]['messaging'][0]['sender']['id'];
     $message = $input['entry'][0]['messaging'][0]['message']['text'];
 
@@ -46,7 +46,7 @@
         } else {
             $data = json_decode($response, true);
             if(!empty($data['latest_stat_by_country'][0]['country_name'])) {
-                
+
                 $countryname = $data['latest_stat_by_country'][0]['country_name'];
                 $cases = $data['latest_stat_by_country'][0]['total_cases'];
                 $newcases = $data['latest_stat_by_country'][0]['new_cases'];
